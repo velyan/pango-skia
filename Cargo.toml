@@ -1,0 +1,16 @@
+[package]
+name = "pango-test"
+version = "0.1.0"
+authors = ["Velislava Yanchina <vel.yanchina@yahoo.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cairo-rs =  { version = "0.7.1", features = ["png", "svg"] } 
+pango ="0.7.0"
+pango-sys = "0.9.0"
+skia-bindings = "0.17.0"
+skia-safe = "0.17.0"
+glib = "0.8.2"
+pangocairo = "0.8.0"
