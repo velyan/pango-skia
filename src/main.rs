@@ -2,7 +2,7 @@ mod pango_cairo_skia;
 mod skia_renderer;
 
 use cairo::*;
-use pango::{ Layout as PangoLayout, Underline, Attribute, Direction, EllipsizeMode, GlyphItemIter};
+use pango::{ Layout as PangoLayout, Underline, Attribute, Direction, EllipsizeMode};
 use pangocairo::functions::{create_layout, show_layout, create_context};
 // use std::path::Path;
 use std::fs::File;
@@ -35,7 +35,7 @@ fn cairo_pango_skia() {
         let mut canvas = Canvas::new(500, 2000);
 
         let mut glyph_x = x_offset;
-        
+
         for run in iterator.get_run_readonly() {
 
                 let pango_item: pango::Item = unsafe { from_glib_none((*run.to_glib_none().0).item) };
@@ -52,7 +52,7 @@ fn cairo_pango_skia() {
 
                 let mut glyphs = Vec::<u32>::with_capacity(glyph_count);
                 let mut positions = Vec::<SkPoint>::with_capacity(glyph_count);
-                
+
                 for i in 0..glyph_count {
                         let glyph_info = glyph_infos[i];
                         let pos =  SkPoint::new(glyph_x, y_offset); // todo: + offset 
@@ -92,9 +92,7 @@ fn cairo_pango_skia() {
                 let blob = builder.make().unwrap();
                 let skia_canvas = canvas.canvas();
                 
-                skia_canvas.draw_text_blob(&blob, SkPoint::new(x_offset, y_offset), &paint);
-
-                iterator.next_run();
+                skia_canvas.draw_text_blob(&blob, SkPoint::new(10.0, y_offset), &paint);
         }
 
         let d = canvas.data();
