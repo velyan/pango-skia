@@ -92,7 +92,7 @@ fn cairo_pango_skia() {
                 let blob = builder.make().unwrap();
                 let skia_canvas = canvas.canvas();
                 
-                skia_canvas.draw_text_blob(&blob, SkPoint::new(10.0, y_offset), &paint);
+                skia_canvas.draw_text_blob(&blob, SkPoint::new(10.x_offset, y_offset), &paint);
         }
 
         let d = canvas.data();
