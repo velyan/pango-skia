@@ -33,11 +33,8 @@ fn cairo_pango_skia() {
         let mut iterator = layout.get_iter().unwrap();
         let y_offset: SkScalar = pango_pixels(iterator.get_baseline()) as f32;
         let x_offset: SkScalar = 0.0;
-
-        let current_line = iterator.get_line_readonly().unwrap();
   
         let mut canvas = Canvas::new(500, 2000);
-
         let mut glyph_x = x_offset;
 
         for run in iterator.get_run_readonly() {
@@ -71,7 +68,6 @@ fn cairo_pango_skia() {
                 
 
                 //Skia
-
                 let mut paint = SkPaint::default();
                 paint.set_anti_alias(true);
                 let typeface = Typeface::new("Georgia", skia_safe::FontStyle::default()).unwrap();
