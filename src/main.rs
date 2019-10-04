@@ -1,14 +1,12 @@
-mod pango_cairo_skia;
 mod skia_renderer;
 
 use cairo::*;
 use pango::{ Layout as PangoLayout, Underline, Attribute, Direction, EllipsizeMode};
-use pangocairo::functions::{create_layout, show_layout, create_context};
-// use std::path::Path;
+use pangocairo::functions::{show_layout, create_context};
 use std::fs::File;
 use glib::translate::*;
 use pango_sys;
-use skia_safe::{Point as SkPoint, Paint as SkPaint, Typeface, Font as SkFont, FontStyle, TextBlobBuilder};
+use skia_safe::{Point as SkPoint, Paint as SkPaint, Typeface, Font as SkFont, TextBlobBuilder};
 use skia_bindings::{SkScalar};
 use std::io::Write;
 use crate::skia_renderer::Canvas;
@@ -19,9 +17,15 @@ fn main() {
    cairo_pango_skia();
 }
 
+fn create_layout() -> pango::Layout {
+    let surface = cairo::ImageSurface::create(cairo::Format::ARgb32, 0, 0).unwrap();
+    let ctx = cairo::Context::new(&surface);
+    pangocairo::functions::create_layout(&ctx).unwrap()
+}
+
 fn cairo_pango_skia() {
         let text = String::from("Georgia 30");
-        let layout = pango_cairo_skia::create_layout();
+        let layout = create_layout();
         let desc = pango::FontDescription::from_string("Georgia 30");
         layout.set_font_description(Some(&desc));
         layout.set_text(text.as_str());
@@ -115,7 +119,7 @@ fn attributes_support() {
         ctx.set_source_rgb(0.0, 0.0, 0.0);
         ctx.translate(20.0, 30.0);
 
-        let mut layout = create_layout(&ctx).unwrap();
+        let mut layout = pangocairo::functions::create_layout(&ctx).unwrap();
 
         // Normal
         let mut desc = pango::FontDescription::from_string("Georgia 30");
