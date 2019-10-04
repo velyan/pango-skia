@@ -21,7 +21,7 @@ fn main() {
 
 fn cairo_pango_skia() {
         let text = String::from("Georgia 30");
-        let layout =  pango_cairo_skia::create_layout();
+        let layout = pango_cairo_skia::create_layout();
         let desc = pango::FontDescription::from_string("Georgia 30");
         layout.set_font_description(Some(&desc));
         layout.set_text(text.as_str());
@@ -92,7 +92,7 @@ fn cairo_pango_skia() {
                 let blob = builder.make().unwrap();
                 let skia_canvas = canvas.canvas();
                 
-                skia_canvas.draw_text_blob(&blob, SkPoint::new(10.x_offset, y_offset), &paint);
+                skia_canvas.draw_text_blob(&blob, SkPoint::new(x_offset, y_offset), &paint);
         }
 
         let d = canvas.data();
